@@ -29,13 +29,14 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use((req, res, next) => {
-	if (checkToken(req.cookies.token)) {
-		next();
-	} else {
-		res.redirect('/');
-	}
-});
+// app.use('/inbox', (req, res, next) => {
+// 	console.log('TOKEN: ', req.cookies.token);
+// 	if (checkToken(req.cookies.token)) {
+// 		next();
+// 	} else {
+// 		res.redirect('/login');
+// 	}
+// });
 
 /* ----------GET---------- */
 app.get('/', (req, res) => {
@@ -57,26 +58,29 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/inbox', (req, res) => {
-	res.render(__dirname + '/public/pages/inbox/inbox.ejs');
+	let username = req.cookie.user;
+
+	res.render(__dirname + '/public/pages/inbox/inbox.ejs', {});
 });
 
-app.get('/inbox/send', (req, res) => {});
+app.get('/inbox/send', (req, res) => {
+	res.sendFile(__dirname + '/public/pages/send.html');
+});
 
 /* ----------POST---------- */
 app.post('/login', (req, res) => {
 	let username = req.body.username;
 	let password = req.body.password;
 
-	res.cookie('user', bcrypt.hashSync(username, salt), {
-		maxAge: 3600 * 1000 * 24 * 365,
-		httpOnly: true
-	});
-	res.cookie('token', newToken(), {
-		maxAge: 3600 * 1000 * 24 * 365,
-		httpOnly: true
-	});
-
 	if (checkUser(username, password)) {
+		res.cookie('user', bcrypt.hashSync(username, salt), {
+			maxAge: 3600 * 1000 * 24 * 365,
+			httpOnly: true
+		});
+		res.cookie('token', newToken(), {
+			maxAge: 3600 * 1000 * 24 * 365,
+			httpOnly: true
+		});
 		res.redirect('/inbox');
 	} else {
 		res.redirect('/login?failure=true');
@@ -87,18 +91,18 @@ app.post('/register', (req, res) => {
 	let username = req.body.username;
 	let password = req.body.password;
 
-	res.cookie('user', bcrypt.hashSync(username, salt), {
-		maxAge: 3600 * 1000 * 24 * 365,
-		httpOnly: true
-	});
-	res.cookie('token', newToken(), {
-		maxAge: 3600 * 1000 * 24 * 365,
-		httpOnly: true
-	});
-
 	if (checkUser(username, password)) {
 		res.redirect('/login?failure=true');
 	} else {
+		newUser(username, password);
+		res.cookie('user', bcrypt.hashSync(username, salt), {
+			maxAge: 3600 * 1000 * 24 * 365,
+			httpOnly: true
+		});
+		res.cookie('token', newToken(), {
+			maxAge: 3600 * 1000 * 24 * 365,
+			httpOnly: true
+		});
 		res.redirect('/inbox');
 	}
 });
@@ -116,7 +120,8 @@ function newUser(username, password) {
 	let token = randID();
 	store.write('users/' + username, {
 		password: bcrypt.hashSync(password, salt),
-		token: token
+		token: token,
+		emails: []
 	});
 	return token;
 }
@@ -140,9 +145,7 @@ function getEmails(username) {
 
 function newToken(username) {
 	let token = randID();
-	store.write('users/' + username, {
-		token: token
-	});
+	store.write('users/' + username + '/token', token);
 	return token;
 }
 
