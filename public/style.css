@@ -7,13 +7,13 @@
 body {
 	margin: 0;
 	padding: 0;
+	background-color: #1d82e7;
+	color: white;
 	/* font-family: Noto Sans, sans-serif; */
 	/* font-family: 'Roboto', sans-serif; */
 	/* font-family: 'Roboto Condensed', sans-serif; */
 	/* font-family: 'Ubuntu', sans-serif; */
 	font-family: 'Montserrat', sans-serif;
-	background-color: #1d82e7;
-	color: white;
 }
 
 body, div, h1, p {
@@ -36,68 +36,68 @@ a, a:visited {
 /* ----------Home---------- */
 .welcome {
 	display: flex;
-	flex-direction: column;
-	text-align: center;
-	height: max-content;
-	margin: 0 auto;
 	align-items: center;
-	font-size: 180%;
+	flex-direction: column;
+	margin: 0 auto;
 	margin-top: 2vh;
+	height: max-content;
+	text-align: center;
+	font-size: 180%;
 }
 
 .welcome-message {
-  display: block;
-  font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
-  font-weight: bold;
+	display: block;
+	margin-top: 0.67em;
+	margin-right: 0;
+	margin-bottom: 0.67em;
+	margin-left: 0;
 	color: white !important;
+	font-weight: bold;
+	font-size: 2em;
 }
 
 .accountButtons {
 	display: flex;
-	flex-direction: row;
-	width: 50%;
-	margin: 0 auto;
-	height: 32vh;
 	align-items: center;
+	flex-direction: row;
 	justify-content: space-evenly;
+	margin: 0 auto;
+	width: 50%;
+	height: 32vh;
 }
 
 .accountButtons > a {
 	display: block;
-	border: none;
-	background-color: white;
-	color: black;
-	box-shadow: 0px 3px 3px 0px #00000066;
+	padding: 0.5vw;
 	/* height: 30%; */
 	width: 20%;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 24px;
-	transition: 200ms ease-out;
-	cursor: pointer;
 	outline: none;
-	padding: 0.5vw;
-	text-align: center;
+	border: none;
 	border-radius: 6px;
+	background-color: white;
+	box-shadow: 0 3px 3px 0 #00000066;
+	color: black;
+	text-align: center;
+	font-size: 24px;
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
+	transition: 200ms ease-out;
 }
 
 .accountButtons > a:hover {
-	box-shadow: 0px 3px 5px 1px #000000bb;
 	background-color: black;
+	box-shadow: 0 3px 5px 1px #000000bb;
 	color: white;
 }
 
 .about {
 	display: flex;
 	flex-direction: column;
-	text-align: center;
-	height: 50vh;
-	font-size: 120%;
-	width: 60%;
 	margin: 0 auto;
+	width: 60%;
+	height: 50vh;
+	text-align: center;
+	font-size: 120%;
 }
 
 .about-item {
@@ -109,10 +109,10 @@ a, a:visited {
 .loginbox {
 	display: flex;
 	flex-direction: column;
-	width: 30%;
 	/* background-color: white; */
 	margin: 0 auto;
-	margin-top: 10%;
+	margin-top: 8%;
+	width: 30%;
 }
 
 .loginbox > form {
@@ -125,34 +125,34 @@ form > input {
 }
 
 #username, #password {
-	font-size: 19px;
-	color: black;
 	padding: 6px;
-	border-radius: 6px;
 	border: 1px solid grey;
-	box-shadow: 0px 3px 3px 0px #00000066;
+	border-radius: 6px;
+	box-shadow: 0 3px 3px 0 #00000066;
+	color: black;
+	font-size: 19px;
 }
 
 #submit {
 	display: block;
-	border: none;
-	background-color: white;
-	color: black;
-	box-shadow: 0px 3px 3px 0px #00000066;
-	width: max-content;
-	font-family: 'Montserrat', sans-serif;
-	font-size: 22px;
-	transition: 200ms ease-out;
-	cursor: pointer;
-	outline: none;
-	padding: 0.5vw;
-	text-align: center;
-	border-radius: 6px;
 	margin: 26px auto;
+	padding: 0.5vw;
+	width: max-content;
+	outline: none;
+	border: none;
+	border-radius: 6px;
+	background-color: white;
+	box-shadow: 0 3px 3px 0 #00000066;
+	color: black;
+	text-align: center;
+	font-size: 22px;
+	font-family: 'Montserrat', sans-serif;
+	cursor: pointer;
+	transition: 200ms ease-out;
 }
 
 #submit:hover {
-	box-shadow: 0px 3px 5px 1px #000000bb;
 	background-color: black;
+	box-shadow: 0 3px 5px 1px #000000bb;
 	color: white;
 }
