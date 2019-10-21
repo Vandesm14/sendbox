@@ -25,8 +25,10 @@ class Database {
 			let last = path.pop();
 			let curr = self.records;
 			for (let i of path) {
-				curr[i] = {};
-				curr = curr[i];
+				if (curr[i]) {
+					curr[i] = {};
+					curr = curr[i];
+				}
 			}
 			curr[last] = data;
 			fs.writeFileSync(this.file, JSON.stringify(self.records), 'utf8', (data) => {
@@ -39,7 +41,11 @@ class Database {
 				path = path.split('/');
 				if (path !== ['']) {
 					for (let i of path) {
-						curr = curr[i];
+						if (curr[i]) {
+							curr = curr[i];
+						} else {
+							return undefined;
+						}
 					}
 				}
 			}
